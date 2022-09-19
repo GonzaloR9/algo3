@@ -1,0 +1,28 @@
+1) ¿Qué crítica le harías al protocolo de #estaHerido y #noEstaHerido? (en vez de tener solo el mensaje #estaHerido y hacer “#estaHerido not” para saber la negación)
+	Tener ambos mensajes ayuda a la legibilidad, ya que particularmente en SmallTalk, el "not" se pone al final y puede llevar a la confusión.
+	También es cierto que la idea es que el conjunto de mensajes sea minimal, cosa que no estaríamos respetando al poner 2 mensajes, y que la existencia
+	de uno implica que el otro sea algo redundante, por lo que no estaría mal tener solo un mensaje, en vez de dos.
+
+
+2) ¿Qué opinan de que para algunas funcionalidades tenemos 3 tests para el mismo comportamiento pero aplicando a cada uno de los combatientes (Arthas, Mankrik y Olgra)
+
+	Los tests deben ser unitarios, es decir, cada uno prueba algo distinto. Es acertado que exista un test para cada uno para asegurar que todo funcione correctamente.
+	Además, tener estos tests por separado implica que si en algún momento un combatiente es levemente modificado, el potencial test que fallaría es únicamente aquel
+	que prueba al combatiente en cuestión. Si tuvieramos un test general para todos los personajes y deseamos modificar a uno solo, tendríamos que crear tests aparte
+	para cada uno tarde o temprano.
+
+
+
+3) ¿Cómo modelaron el resultado de haber desarrollado un combate? ¿qué opciones consideraron y por qué se quedaron con la que entregaron y por qué descartaron a las otras?
+	Lo que nosotros hicimos es:
+		Si ganó el bando 1, devolvemos 'ganóBando1'.
+		Si ganó el bando 2, devolvemos 'ganóBando2'.
+		Si fue un empate, devolvemos 'Empate'.
+	Al devolver al ganador, la arbitrariedad es inevitable, debíamos pensar en cómo devolver un ganador sin romper la legibilidad y el entendimiento del código.
+	Por esto, definimos explicitar claramente quién ganó con un string descriptivo. La otra alternativa que consideramos era:
+		Si ganó el bando 1, devolvemos 1.
+		Si ganó el bando 2, devolvemos 2.
+		Si fue un empate, devolvemos 0.
+	Decidimos descartar esta opción, ya que no es una forma explícita y clara de describir al ganador, lo que provocaría confusiones más frecuentes a la hora de,
+	por ejemplo, imprimir el resultado.
+	
